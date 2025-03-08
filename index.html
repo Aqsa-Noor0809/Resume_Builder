@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Resume Builder</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container ">
+            <h1>Dynamic Resume Builder</h1>
+        <form id="resume-form">
+            <fieldset>
+            <legend>
+                Personal Information
+            </legend><br>
+            <label for="Photo">
+                Upload Photo:
+            </label>
+            <input type="file" id="photo" name="photo" required>
+            <label for="full name">Fill Name</label>
+            
+            <input type="text" id="fullName" name="full name" placeholder="Enter Your Full Name" required>
+            
+            <label for="email">Email</label>
+            
+            <input type="email" id="email" name="email" placeholder="Enter Email" required>
+            
+            <label for="phone">Phone</label>
+            
+            <input type="tel" id="phone" name="phone" placeholder="Enter Your Phone Number" required>
+        </fieldset>
+        <fieldset>
+            <legend>Education</legend>
+            <label for="degree">
+                Degree
+            </label>
+            <input type="text" id="degree" name="degree" required>
+            <label for="institute">Institute</label>
+            <input type="text" id="institute" name="institute" required>
+        </fieldset>
+        <fieldset>
+            <legend>Skills</legend>
+            <label for="skills">Let us know your Skills</label>
+            <textarea name="skills" id="skills" required></textarea>
+        </fieldset>
+        <fieldset>
+            <legend>
+                Experience
+            </legend>
+            <label for="work experience">Work Experience</label>
+            <textarea name="work experience" id="workExperience" required></textarea>
+        </fieldset>
+        <button type="submit">Generate Form</button>
+        </form>
+    </div>
+
+
+
+
+        <div id="resumePage" class="resume-page hidden">
+            <div id="resumeContant" class="resume-contant">
+
+                <img id="resumePhoto" class="resume-photo" src="" alt="photo">
+
+                <h1 id="resumeName"></h1>
+                <p id="resumeEmail"></p>
+                <p id="resumePhone"></p>
+
+                <h2>Education:</h2>
+                <p id="resumeEducation"></p>
+
+                <h2>Skill(s):</h2>
+                <ul id="resumeSkills"></ul>
+
+                <h2>Work Experience:</h2>
+                <p id="resumeExperience"></p>
+
+            </div>
+            <button id="editButton">Edit</button>
+            <button id="backbutton" onclick="window.location.href='index.html'">Back to Form</button>
+            <button id="download">Download Resume</button>
+            <button id="resumeShareLink">Share your Resume</button>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+
+
+        <script src="script.js"></script>
+    </body>
+</html>
+
