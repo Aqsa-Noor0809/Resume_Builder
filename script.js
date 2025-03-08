@@ -11,7 +11,6 @@ const resumeEducation = document.getElementById("resumeEducation");
 const resumeSkills = document.getElementById("resumeSkills");
 const resumeExperience = document.getElementById("resumeExperience");
 const editButton = document.getElementById("editButton");
-const resumeShareLink = document.getElementById("resumeShareLink");
 const downloadButton = document.getElementById("download");
 const resumeContent = document.getElementById("resumeContant");
 
@@ -37,30 +36,10 @@ form.addEventListener("submit", (event) => {
       resumePhoto.src = formData.photoBase64;
       updateResumePage(formData);
       toggleView(true);
-
-      // Generate and copy the shareable link
-      const queryParams = new URLSearchParams(formData).toString();
-      const uniqueUrl = `${window.location.origin}${window.location.pathname}?${queryParams}`;
-      resumeShareLink.addEventListener("click", () => {
-        navigator.clipboard.writeText(uniqueUrl);
-        alert("The link is copied to your clipboard!");
-      });
-
-      window.history.replaceState(null, "", `?${queryParams}`);
     });
   } else {
     updateResumePage(formData);
     toggleView(true);
-
-    // Generate and copy the shareable link
-    const queryParams = new URLSearchParams(formData).toString();
-    const uniqueUrl = `${window.location.origin}${window.location.pathname}?${queryParams}`;
-    resumeShareLink.addEventListener("click", () => {
-      navigator.clipboard.writeText(uniqueUrl);
-      alert("The link is copied to your clipboard!");
-    });
-
-    window.history.replaceState(null, "", `?${queryParams}`);
   }
 });
 
@@ -77,8 +56,8 @@ function updateResumePage(data) {
   resumePhone.textContent = `Phone: ${data.phone}`;
   resumeEducation.textContent = `${data.degree} from ${data.education}`;
 
-  // Display skills as a list (for the webpage)
-  resumeSkills.innerHTML = ""; // Clear existing content
+  // Display skills as a list (only once)
+  resumeSkills.innerHTML = "";
   const skillsArray = data.skills.split(",").map((skill) => skill.trim());
   skillsArray.forEach((skill) => {
     const li = document.createElement("li");
@@ -86,20 +65,25 @@ function updateResumePage(data) {
     resumeSkills.appendChild(li);
   });
 
-  // Display experience with line breaks (for the webpage)
+  // Display experience (only once)
   resumeExperience.innerHTML = data.workExperience.replace(/\n/g, "<br>");
 
-  // Create a hidden div for PDF rendering
+  // Create hidden divs for PDF rendering
   const pdfSkills = document.createElement("div");
-  pdfSkills.style.display = "none"; // Hide from the webpage
+  pdfSkills.style.display = "none";
   pdfSkills.id = "pdfSkills";
-  pdfSkills.textContent = `Skills: ${skillsArray.join(", ")}`; // Plain text for PDF
+  pdfSkills.innerHTML = `<strong>Skills:</strong><ul>${skillsArray
+    .map((skill) => `<li>${skill}</li>`)
+    .join("")}</ul>`;
   resumeContent.appendChild(pdfSkills);
 
   const pdfExperience = document.createElement("div");
-  pdfExperience.style.display = "none"; // Hide from the webpage
+  pdfExperience.style.display = "none";
   pdfExperience.id = "pdfExperience";
-  pdfExperience.textContent = `Experience:\n${data.workExperience.replace(/\n/g, "\n")}`; // Plain text with line breaks for PDF
+  pdfExperience.innerHTML = `<strong>Experience:</strong><p>${data.workExperience.replace(
+    /\n/g,
+    "<br>"
+  )}</p>`;
   resumeContent.appendChild(pdfExperience);
 }
 
@@ -140,19 +124,16 @@ downloadButton.addEventListener("click", () => {
     return;
   }
 
-  // Temporarily show the resume page if it's hidden
   const isResumeHidden = resumePage.classList.contains("hidden");
   if (isResumeHidden) {
     toggleView(true);
   }
 
-  // Temporarily show all hidden elements
   const hiddenElements = document.querySelectorAll("[style*='display: none']");
   hiddenElements.forEach((element) => {
     element.style.display = "block";
   });
 
-  // Add a small delay to ensure all content is fully rendered
   setTimeout(() => {
     const options = {
       margin: 0.5,
@@ -167,12 +148,9 @@ downloadButton.addEventListener("click", () => {
       .set(options)
       .save()
       .then(() => {
-        // Hide the resume page again if it was hidden
         if (isResumeHidden) {
           toggleView(false);
         }
-
-        // Hide the temporarily shown elements
         hiddenElements.forEach((element) => {
           element.style.display = "none";
         });
@@ -180,7 +158,7 @@ downloadButton.addEventListener("click", () => {
       .catch((error) => {
         console.error("PDF generation error:", error);
       });
-  }, 500); // 500ms delay
+  }, 500);
 });
 
 // On Page Load
