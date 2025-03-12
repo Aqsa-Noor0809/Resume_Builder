@@ -1,7 +1,7 @@
 /* #84b067
-#a7de83
+black
 #4b633b
-#2c3b23
+#ffffff
 #dcfacc
 #a4da81
 #84b067
@@ -10,110 +10,168 @@
 #2d3f21
 #2d3f21 */
 
-
-body{
+body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #a7de83 ;
-    
-    
-    .container{
-        background-color: white;
-        margin: auto;
-        padding: 20px;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 650px;
+    background-color: black;
+}
 
+.container {
+    background-color: black;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 650px;
+    color: #ffffff;
+    border: 2px solid orange;
+}
+
+button {
+    padding: 0.55em 1.8em;
+    margin-top: 25px;
+    border: none;
+    font-weight: bold;
+    background-color: black;
+    cursor: pointer;
+    font-size: 1em;
+    color: #ffffff;
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.7em;
+    margin-top: 0.7em;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1.1em;
+}
+
+textarea {
+    height: 130px;
+    border-radius: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="file"],
+textarea,
+button {
+    width: 100%;
+    padding: 0.85em;
+    margin-top: 0.5em;
+    border: 4px solid rgba(218, 142, 2, 0.815);
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+fieldset {
+    background-color: black;
+    border-radius: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+#resumePage img {
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+    border: solid 5px orange;
+}
+
+#resumePage {
+    width: 90%;
+    max-width: 650px;
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    border: 4px solid orange;
+}
+
+#resumePage h1 {
+    text-align: center;
+    color: orange;
+}
+
+#resumePage h2 {
+    font-size: 20px;
+    text-align: left;
+    color: orange;
+}
+
+#resumePage button {
+    background-color: orange;
+}
+
+#resumeSkills ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+#resumeSkills li {
+    margin-bottom: 5px;
+}
+
+/* Responsiveness Added Below */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
     }
 
-    button{
-        padding: 0.55em 1.8em;
-        margin-top: 25px;
-        border: none;
-        font-weight: bold;
-        background-color: #c5fda0;
-        cursor: pointer;
+    .container,
+    #resumePage {
+        width: 95%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    label {
         font-size: 1em;
-
     }
 
-    h1{
-        text-align: center;
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="file"],
+    textarea,
+    button {
+        padding: 0.7em;
     }
-    label{
-        display: block;
-        margin-bottom: 0.7em;
-        margin-top: 0.7em;
-        font-weight: bold;
-        color: #2c3b23 ;
-        font-size: 1.1em;
-    };
-    
-    textarea{
-        height: 130px;
-        border-radius: 10px;
-    };
-    
-    input[type="text"],input[type="email"],input[type="tel"],input[type="file"],textarea,button{
-        width: 100%;
-        padding: 0.85em;
-        margin-top: 0.5em;
-        border: 2px solid rgb(101, 136, 78);
-        box-sizing: border-box;
-        border-radius: 10px;
-    }
+}
 
-    fieldset{
-        background-color: #a7de83;
-        border-radius: 10px;
-    }
-    
-    .hidden{
-        display: none;
-    }
-    
-    #resumePage img{
-        object-fit: cover;
-        border-radius: 50%;
-        display: block;
-        margin: auto;
-        border: solid 5px #c5fda0;
-    };
-
-    #resumePage{
-        width: 90%;
-        max-width: 650px;
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;      
-    }
-
-    #resumePage h1{
-        text-align: center;
-        color: black;
-    }
-
-    #resumePage h2{
+@media (max-width: 480px) {
+    h1 {
         font-size: 20px;
-        text-align: left;
-        color: black;
     }
 
-    #resumePage button{
-        background-color: #c5fda0;
+    label {
+        font-size: 0.9em;
     }
 
-    #resumeSkills ul {
-        list-style-type: disc;
-        padding-left: 20px;
-      }
-      
-      #resumeSkills li {
-        margin-bottom: 5px;
-      }
-};
+    button {
+        font-size: 0.9em;
+    }
 
+    #resumePage h2 {
+        font-size: 18px;
+    }
 
+    #resumePage img {
+        width: 100px;
+        height: 100px;
+    }
+}

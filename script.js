@@ -51,48 +51,48 @@ function toggleView(showResume) {
 
 // Update Resume Page Content
 function updateResumePage(data) {
-    resumeName.textContent = data.name;
-    resumeEmail.textContent = `Email: ${data.email}`;
-    resumePhone.textContent = `Phone: ${data.phone}`;
-    resumeEducation.textContent = `${data.degree} from ${data.education}`;
-  
-    // Clear existing skills and experience
-    resumeSkills.innerHTML = "";
-    resumeExperience.innerHTML = "";
-  
-    // Remove existing PDF elements to avoid duplication
-    document.getElementById("pdfSkills")?.remove();
-    document.getElementById("pdfExperience")?.remove();
-  
-    // Display skills as a list (only once)
-    const skillsArray = data.skills.split(",").map((skill) => skill.trim());
-    skillsArray.forEach((skill) => {
-      const li = document.createElement("li");
-      li.textContent = skill;
-      resumeSkills.appendChild(li);
-    });
-  
-    // Display experience (only once)
-    resumeExperience.innerHTML = data.workExperience.replace(/\n/g, "<br>");
-  
-    // Create NEW hidden divs for PDF rendering
-    const pdfSkills = document.createElement("div");
-    pdfSkills.style.display = "none";
-    pdfSkills.id = "pdfSkills";
-    pdfSkills.innerHTML = `<strong>Skills:</strong><ul>${skillsArray
-      .map((skill) => `<li>${skill}</li>`)
-      .join("")}</ul>`;
-    resumeContent.appendChild(pdfSkills);
-  
-    const pdfExperience = document.createElement("div");
-    pdfExperience.style.display = "none";
-    pdfExperience.id = "pdfExperience";
-    pdfExperience.innerHTML = `<strong>Experience:</strong><p>${data.workExperience.replace(
-      /\n/g,
-      "<br>"
-    )}</p>`;
-    resumeContent.appendChild(pdfExperience);
-  }
+  resumeName.textContent = data.name;
+  resumeEmail.textContent = `Email: ${data.email}`;
+  resumePhone.textContent = `Phone: ${data.phone}`;
+  resumeEducation.textContent = `${data.degree} from ${data.education}`;
+
+  // Clear existing skills and experience
+  resumeSkills.innerHTML = "";
+  resumeExperience.innerHTML = "";
+
+  // Remove existing PDF elements to avoid duplication
+  document.getElementById("pdfSkills")?.remove();
+  document.getElementById("pdfExperience")?.remove();
+
+  // Display skills as a list (only once)
+  const skillsArray = data.skills.split(",").map((skill) => skill.trim());
+  skillsArray.forEach((skill) => {
+    const li = document.createElement("li");
+    li.textContent = skill;
+    resumeSkills.appendChild(li);
+  });
+
+  // Display experience (only once)
+  resumeExperience.innerHTML = data.workExperience.replace(/\n/g, "<br>");
+
+  // Create NEW hidden divs for PDF rendering
+  const pdfSkills = document.createElement("div");
+  pdfSkills.style.display = "none";
+  pdfSkills.id = "pdfSkills";
+  pdfSkills.innerHTML = `<strong>Skills:</strong><ul>${skillsArray
+    .map((skill) => `<li>${skill}</li>`)
+    .join("")}</ul>`;
+  resumeContent.appendChild(pdfSkills);
+
+  const pdfExperience = document.createElement("div");
+  pdfExperience.style.display = "none";
+  pdfExperience.id = "pdfExperience";
+  pdfExperience.innerHTML = `<strong>Experience:</strong><p>${data.workExperience.replace(
+    /\n/g,
+    "<br>"
+  )}</p>`;
+  resumeContent.appendChild(pdfExperience);
+}
 
 // Convert File to Base64
 function fileToBase64(file) {
@@ -136,6 +136,10 @@ downloadButton.addEventListener("click", () => {
     toggleView(true);
   }
 
+  // Add a class to the body to enable PDF-specific styles
+  document.body.classList.add("pdf-mode");
+
+  // Temporarily show hidden elements for PDF generation
   const hiddenElements = document.querySelectorAll("[style*='display: none']");
   hiddenElements.forEach((element) => {
     element.style.display = "block";
@@ -155,12 +159,15 @@ downloadButton.addEventListener("click", () => {
       .set(options)
       .save()
       .then(() => {
-        if (isResumeHidden) {
-          toggleView(false);
-        }
+        // Remove the PDF mode class and reset styles
+        document.body.classList.remove("pdf-mode");
         hiddenElements.forEach((element) => {
           element.style.display = "none";
         });
+
+        if (isResumeHidden) {
+          toggleView(false);
+        }
       })
       .catch((error) => {
         console.error("PDF generation error:", error);
