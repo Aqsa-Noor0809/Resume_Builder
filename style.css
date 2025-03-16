@@ -1,7 +1,8 @@
+/* Color Palette */
 /* #84b067
-black
+#a7de83
 #4b633b
-#ffffff
+#2c3b23
 #dcfacc
 #a4da81
 #84b067
@@ -15,18 +16,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: #a7de83;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .container {
-    background-color: black;
+    background-color: white;
     margin: auto;
     padding: 20px;
     border-radius: 10px;
     width: 90%;
     max-width: 650px;
-    color: #ffffff;
-    border: 2px solid orange;
 }
 
 button {
@@ -34,10 +36,10 @@ button {
     margin-top: 25px;
     border: none;
     font-weight: bold;
-    background-color: black;
+    background-color: #c5fda0;
     cursor: pointer;
     font-size: 1em;
-    color: #ffffff;
+    width: 100%;
 }
 
 h1 {
@@ -49,7 +51,7 @@ label {
     margin-bottom: 0.7em;
     margin-top: 0.7em;
     font-weight: bold;
-    color: #ffffff;
+    color: #2c3b23;
     font-size: 1.1em;
 }
 
@@ -67,13 +69,13 @@ button {
     width: 100%;
     padding: 0.85em;
     margin-top: 0.5em;
-    border: 4px solid rgba(218, 142, 2, 0.815);
+    border: 2px solid rgb(101, 136, 78);
     box-sizing: border-box;
     border-radius: 10px;
 }
 
 fieldset {
-    background-color: black;
+    background-color: #a7de83;
     border-radius: 10px;
 }
 
@@ -86,32 +88,30 @@ fieldset {
     border-radius: 50%;
     display: block;
     margin: auto;
-    border: solid 5px orange;
+    border: solid 5px #c5fda0;
 }
 
 #resumePage {
     width: 90%;
     max-width: 650px;
-    background-color: black;
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
-    color: #ffffff;
-    border: 4px solid orange;
 }
 
 #resumePage h1 {
     text-align: center;
-    color: orange;
+    color: black;
 }
 
 #resumePage h2 {
     font-size: 20px;
     text-align: left;
-    color: orange;
+    color: black;
 }
 
 #resumePage button {
-    background-color: orange;
+    background-color: #c5fda0;
 }
 
 #resumeSkills ul {
@@ -123,55 +123,65 @@ fieldset {
     margin-bottom: 5px;
 }
 
-/* Responsiveness Added Below */
+/* Responsive Design */
 @media (max-width: 768px) {
     body {
         padding: 10px;
     }
 
-    .container,
-    #resumePage {
-        width: 95%;
+    .container {
         padding: 15px;
     }
 
-    h1 {
-        font-size: 24px;
+    button {
+        font-size: 0.9em;
     }
 
     label {
         font-size: 1em;
     }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    input[type="file"],
-    textarea,
-    button {
-        padding: 0.7em;
+    textarea {
+        height: 100px;
+    }
+
+    #resumePage img {
+        width: 100px;
+        height: 100px;
+    }
+
+    #resumePage h2 {
+        font-size: 18px;
     }
 }
 
 @media (max-width: 480px) {
-    h1 {
-        font-size: 20px;
+    body {
+        padding: 5px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    button {
+        font-size: 0.8em;
     }
 
     label {
         font-size: 0.9em;
     }
 
-    button {
-        font-size: 0.9em;
-    }
-
-    #resumePage h2 {
-        font-size: 18px;
+    textarea {
+        height: 80px;
     }
 
     #resumePage img {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
+    }
+
+    #resumePage h2 {
+        font-size: 16px;
     }
 }
